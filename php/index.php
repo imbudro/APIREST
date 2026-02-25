@@ -20,6 +20,14 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
     return $response;
 });
 
-$app->get('/alunni', "AlunniController:index");
+$app->get('/alunni/', "AlunniController:index");
+//GET
+$app->get('/alunni/{id}', "AlunniController:show");
+//POST
+$app->post('/alunni', "AlunniController:create");
+//PUT
+$app->put('/alunni/{id}', "AlunniController:update");
+//DELETE
+$app->delete('/alunni/{id}', "AlunniController:destroy");
 
 $app->run();
