@@ -51,33 +51,34 @@ class CertificazioniController
     $params = json_decode($request -> getBody(), true);
     $mysqli_connection = new MySQLi('my_mariadb', 'root', 'ciccio', 'scuola');
     $result = $mysqli_connection->query( $result = $mysqli_connection->query(
-      "UPDATE `alunni` 
-       SET `nome` = '" . $params['nome'] . "', 
-           `cognome` = '" . $params['cognome'] . "' 
-       WHERE `id` = " . $args['id']
-  ));
+      "UPDATE `certificazioni` 
+       SET `id`='" . $params['id'] . "',
+       `alunno_id`='" . $params['alunno_id'] . "',
+       `titolo`='" . $params['titolo'] . "',
+       `votazione`='" . $params['votazione'] . "',
+       `ente`='" . $params['ente'] . "'
+       WHERE id = " . $args['id']));
     if($result){
-      $results['message'] = "lo studente è aggiornato  " ;
+      $results['message'] = "certificazione non aggiornata" ;
     }
     else{
 
-      $results['message'] = "lo studente NON è stato aggiornato " ;
+      $results['message'] = "certificazione aggiornata" ;
     }
 
     $response->getBody()->write(json_encode($results));
     return $response->withHeader("Content-type", "application/json")->withStatus(200);
   }  
 
-
   public function destroy(Request $request, Response $response, $args){
     $mysqli_connection = new MySQLi('my_mariadb', 'root', 'ciccio', 'scuola');
-    $result = $mysqli_connection->query("DELETE FROM alunni WHERE id=".$args['id']);
+    $result = $mysqli_connection->query("DELETE FROM certificazioni WHERE id=".$args['id']);
     if($result){
-      $results['message'] = "lo studente " . $args['id']. " rimosso con successo" ;
+      $results['message'] = "certificazione" . $args['id']. " rimossa con successo" ;
     }
     else{
 
-      $results['message'] = "lo studente " . $args['id']. " NON è rimosso con successo" ;
+      $results['message'] = "certificazione" . $args['id']. " NON rimossa" ;
     }
     $response->getBody()->write(json_encode($results));
     

@@ -38,9 +38,9 @@ $app->get('/alunni/{id}/certificazioni/', "CertificazioniController:show");
 //POST
 $app->post('/certificazioni', "CertificazioniController:create");
 //PUT
-#$app->put('/alunni/{id}', "CertificazioniController:update");
+$app->put('/certificazioni/{id}', "CertificazioniController:update");
 //DELETE
-#$app->delete('/alunni/{id}', "CertificazioniController:destroy");
+$app->delete('/certificazioni/{id}', "CertificazioniController:destroy");
 
 
 
